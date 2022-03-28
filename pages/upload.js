@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import QRCode from "qrcode.react";
 import Header from "./components/Header";
 import useSWR from "swr";
+// import randomstring from "randomstring"
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -19,7 +20,7 @@ const fetcher = async (url) => {
 
 export default function Upload() {
   const router = useRouter();
-  const { data, error } = useSWR("/api/hello", fetcher);
+  // const { data, error } = useSWR("/api/hello", fetcher);
   const [qrValue, setQrValue] = useState("");
 
   const downloadQRCode = () => {
@@ -44,7 +45,10 @@ export default function Upload() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    let res = await fetch("http://localhost:3000/api/hello", {
+    // console.log(data)
+    // data.p_id=toString(Math.floor(Math.random() * 100));
+    console.log(data)
+    let res = await fetch("http://localhost:3000/api/upload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +57,8 @@ export default function Upload() {
     });
     let res_data = await res.json();
 
-    setQrValue(JSON.stringify(res_data.text));
+    setQrValue(JSON.stringify(res_data.hash));
+    
   };
 
   return (
@@ -70,13 +75,22 @@ export default function Upload() {
               <div className="form-group col-5">
                 <label>Your(Seller) Id</label>
                 <input
-                  name="ID"
+                  name="id"
                   type="text"
-                  {...register("ID")}
+                  {...register("id")}
                   className={`form-control ${errors.ID ? "is-invalid" : ""}`}
                 />
               </div>
+
               <div className="form-group col-5">
+                <label>Product Id</label>
+                <input
+                  name="p_id"
+                  type="text"
+                  {...register("p_id")}
+                  className={`form-control ${errors.ID ? "is-invalid" : ""}`}
+                />
+              </div>              <div className="form-group col-5">
                 <label>Pin Code</label>
                 <input
                   name="pincode"
@@ -101,9 +115,9 @@ export default function Upload() {
               <div className="form-group col">
                 <label>More details about the quality of cloth</label>
                 <input
-                  name="material_info"
+                  name="details"
                   type="text"
-                  {...register("material_info")}
+                  {...register("details")}
                   className={`form-control ${
                     errors.material_info ? "is-invalid" : ""
                   }`}
@@ -147,7 +161,7 @@ export default function Upload() {
               </label>
             </div>
             <div className="form-group">
-              <input type="submit" />
+            
               <button type="submit" className="btn btn-primary mr-1">
                 Register Your Product
               </button>

@@ -11,7 +11,7 @@ export default function Product({ product}) {
      <h3>{product.name}</h3>
      <p class="card-text"><strong>Quantity:</strong> {product.quantity}</p>
      <p class="card-text"><strong>Type:</strong> {product.type}</p>
-     <p class="card-text"><strong>Price:</strong> {product.Price}</p>
+     <p class="card-text"><strong>Price:</strong> {product.price}</p>
      <p class="card-text"><strong>Location Pincode:</strong> {product.pincode}</p>
         <p class="card-text">{product.details}</p>
         <div class="d-flex justify-content-between align-items-center">

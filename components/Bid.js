@@ -11,7 +11,7 @@ export default function Product({ product}) {
      <h3>{product.name}</h3>
      <p class="card-text"><strong>Quantity:</strong> {product.quantity}</p>
      <p class="card-text"><strong>Type:</strong> {product.type}</p>
-     <p class="card-text"><strong>Price:</strong> {product.Price}</p>
+     <p class="card-text"><strong>Price:</strong> {product.price}</p>
      <p class="card-text"><strong>Location Pincode:</strong> {product.pincode}</p>
         <p class="card-text">{product.details}</p>
         <div class="d-flex justify-content-between align-items-center">
@@ -22,7 +22,7 @@ export default function Product({ product}) {
       </button>
             {/* <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> */}
           </div>
-          <small class="text-muted">17/03/2022</small>
+          <small class="text-muted">26/03/2022</small>
         </div>
       </div>
     </div>

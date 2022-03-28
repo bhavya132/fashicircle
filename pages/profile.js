@@ -8,15 +8,22 @@ const Home = () => {
     const [contact, setContact] = React.useState("");
     const getPosts = async() => {
       // const response = await fetch("http://localhost:3000/api/user");
-    await axios.get('http://localhost:3000/api/user').then(async response => {
+      let res = await fetch("http://localhost:3000/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email:'abc@xyz.com'}),
+    });
+    let response = await res.json();
+
+   
   console.log(response)
   console.log(response.data)
   let json=await response.data
- 
   setName(json.name);
   setEmail(json.email);
   setContact(json.contact)
-    })
 
     }
   

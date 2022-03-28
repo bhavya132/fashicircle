@@ -1,6 +1,6 @@
 import dbConnect from '../../lib/dbConnect'
-import User from '../../models/User'
-
+import Product from '../../models/Product'
+var crypto = require('crypto');
 export default async function handler (req, res) {
   const { method } = req
 
@@ -9,13 +9,7 @@ export default async function handler (req, res) {
   switch (method) {
     case 'GET':
       try {
-        let body={
-          name:"Anonymous",
-          email:"abc@xyz.com",
-          id:"1",
-          contact:"8956788956"
-        }
-        const user = await User.create(body)
+        const user = await Product.find()
         res.status(201).json({ success: true, data: user })
       } catch (error) {
 
@@ -24,10 +18,11 @@ export default async function handler (req, res) {
       break
     case 'POST':
       try {
-        const users = await User.find({email:req.body.email})
-        res.status(200).json({ success: true, data: users })
+        const user = await Product.create(req.body)
+        var hash = crypto.createHash('md5').update(JSON.stringify(req.body)).digest('users');
+        res.status(201).json({ success: true, data: user, hash:hash})
       } catch (error) {
-        res.status(400).json({ success: false })
+        res.status(400).json({ success: false, error:error, hash:"eror" })
       }
       break
     default:

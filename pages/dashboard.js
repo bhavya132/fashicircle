@@ -6,7 +6,7 @@ import Product from '../components/Product'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 function Dashboard(props) {
-    const { data, error } = useSWR('/api/product', fetcher)
+    const { data, error } = useSWR('/api/upload', fetcher)
 
     if (error) return <div>Failed to load</div>
     if (!data) return <div>Loading...</div>
@@ -18,7 +18,7 @@ function Dashboard(props) {
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      {data.map((p, i) => (
+      {data.data.map((p, i) => (
         <Product key={i} product={p} />
       ))}
       </div>

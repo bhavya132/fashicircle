@@ -27,6 +27,7 @@ function Home() {
     function onSubmit(data) {
         // display form data on success
         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+        
         router.push('/dashboard')
         return false;
         // return NextResponse.redirect('/signup');
